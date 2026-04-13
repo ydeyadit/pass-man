@@ -87,10 +87,9 @@ Para implementar esta funcionalidad de forma segura y coherente con el diseño a
 1.  Definir un Nuevo Argumento: Crearemos un nuevo argumento en la línea de comandos (por ejemplo, -d o --delete) para que el usuario pueda especificar qué cuenta desea eliminar.
 2.  Implementar la Lógica de Eliminación: Añadiremos un bloque de código que se ejecute cuando se use el nuevo argumento. Este bloque se encargará de buscar la cuenta, pedir confirmación al usuario, eliminarla y guardar la bóveda actualizada.
 
-# Resumen del Uso para el Usuario
+(Ejemplo: El usuario decide eliminar su cuenta de "Amazon")
 
-1. # El usuario decide eliminar su cuenta de "Amazon"
-2. pm --delete Amazon
+`pm --delete Amazon`
 
 La terminal le pedirá su contraseña maestra y luego la confirmación:
 
@@ -100,11 +99,12 @@ La terminal le pedirá su contraseña maestra y luego la confirmación:
 
 Este enfoque es seguro, pide confirmación y se integra limpiamente con la estructura existente del programa.
 
-master_key.json contiene datos (la sal y el hash de verificación) en un formato
-legible.
+---
+
+master_key.json contiene datos (la sal y el hash de verificación) en un formato legible.
 Lejos de ser un descuido, este diseño es intencional y sigue el modelo de seguridad estándar de la industria para este tipo de aplicaciones.
 
-# El Rol de master_key.json y el Secreto Real
+## El Rol de master_key.json y el Secreto Real
 
 Si un atacante obtiene tanto vault.json.enc como master_key.json, tiene casi todo lo necesario para intentar descifrar tu bóveda.
 
@@ -118,7 +118,7 @@ Si un atacante obtiene tanto vault.json.enc como master_key.json, tiene casi tod
 
 La seguridad de todo el sistema no depende de ocultar la sal o el hash, sino de hacer que el proceso de adivinar la contraseña maestra sea computacionalmente inviable.
 
-# El Flujo de Ataque y las Defensas del Sistema
+## El Flujo de Ataque y las Defensas del Sistema
 
 Imaginemos que un atacante tiene esos dos archivos. Para poder abrir tu bóveda, debe ejecutar un "ataque de fuerza bruta offline". Este es el proceso que tendría que seguir:
 
@@ -132,7 +132,7 @@ Si no coinciden (que es lo más probable), debe repetir el proceso desde el paso
 
 No es una debilidad grave; es el modelo de seguridad aceptado. La protección se traslada de la "seguridad por oscuridad" (esconder la sal o el hash) a la "seguridad por costo computacional", que depende directamente de la fortaleza de la contraseña maestra del usuario.
 
-# Una misma bóveda en dos máquinas
+## Una misma bóveda en dos máquinas
 
 Para tener la bóveda funcionando en ambas máquinas, necesitaras sincronizar:
 
@@ -157,7 +157,7 @@ Para tener la bóveda funcionando en ambas máquinas, necesitaras sincronizar:
     2.  Recrear el entorno virtual en la segunda máquina.
     3.  Instalar las dependencias necesarias en ese nuevo venv.
 
-# Pasos Detallados para la Segunda Máquina (Asumiendo que pass-man/ está sincronizado, pero sin `venv/`):
+## Pasos Detallados para la Segunda Máquina (Asumiendo que pass-man/ está sincronizado, pero sin `venv/`):
 
 1.  Sincronizar el directorio `~/.pm/` completamente.
 2.  Sincronizar el directorio `pass-man/` (asegurándote de que venv/ no se copia, o se ignora).
