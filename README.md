@@ -348,3 +348,24 @@ sincronizado, pero sin `venv/`):
 Una vez completados estos pasos, el lanzador pm y la bóveda deberían funcionar
 sin problemas en la segunda máquina, aprovechando un entorno Python configurado
 correctamente para esa instancia.
+
+     ## ✨ Funcionalidades Avanzadas (v2.0)
+
+     Esta versión del gestor (`pm-con-timeout-importarbwjson.py`) incluye mejoras críticas de usabilidad y seguridad:
+
+     ### 🕒 Sesión Persistente (Timeout)
+     Implementa un sistema de "sesión abierta" de **5 minutos**. Al desbloquear la bóveda por primera vez, se genera un token
+      temporal en `~/.pm/session.json`. Esto permite ejecutar múltiples comandos sin reintroducir la contraseña maestra
+      constantemente.
+
+     ### 📥 Importación Masiva
+     Soporte para importar bases de datos externas mediante archivos JSON:
+    - **Bitwarden:** Importación directa de exportaciones estándar.
+    - **Genérico:** Estructura flexible de `cuenta: {user, password}`.
+    *Uso:* `pm --import-json backup.json`
+
+    ### 📋 Portapapeles Seguro
+    Integración con `wl-copy` (Wayland) y `xclip` (X11).
+    - Al usar `--copy`, la contraseña se envía al portapapeles.
+    - **Auto-destrucción:** Un proceso en segundo plano limpia el portapapeles tras **15 segundos** para evitar fugas de
+      información.
