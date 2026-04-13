@@ -26,7 +26,7 @@ Análisis de su Funcionamiento:
 
 ---
 
-2. La Lógica Principal: pm.py (Script de Python)
+2. La Lógica Principal: pm.py y pm-con-timeout-importar-bw-json.py (Para mi el script en uso es el segundo pm-con-timeout-importar-bw-json.py. Tiene mejoras que me gustaron y es el que uso en todas mis máquinas . Good Bye bw !!!)
 
 Este archivo contiene toda la lógica del gestor de contraseñas. Se encarga de la seguridad, el almacenamiento y la interacción con el usuario.
 
